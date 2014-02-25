@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyChofer</title>
+	<!-- "my_style" estilo redundante-->
+	<!-- "jquery-ui/overcast/jquery-ui-1.8.23.custom"-->
+	<%= stylesheet_link_tag "font-awesome", "jquery.tooltip/jquery.tooltip", "profile", "jquery-ui/overcast/jquery-ui-1.8.23.custom", "application", :media => "all" %>
+	<%= javascript_include_tag "application", "my_application", "jquery-1.6.2.min", "jquery-ui-1.8.23.custom.min", "jquery.tooltip" %>
+	<%= csrf_meta_tags %>
+</head>
+<body>
+	<%= yield %>
+</body>
+</html>
+</section>

@@ -1,0 +1,37 @@
+<section id="wrapper">
+	<%=head_to_user_tag-%>
+	<nav>
+		<div class="padding">
+			<%=section_menu_tag(2)-%>
+			<div class="content">
+				<div class="journeys" style="display: none;">
+					<!-- TODO: GOOGLE MAPS -->
+				</div>
+				<div class="account">
+					<div class="panel profile_nav_template">
+						<h1>Informações da conta</h1>
+						<%= profile_menu_tag(3)%>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</nav>
+	
+	<section>
+		<%= form_for(:invite, :url => { :action => "send_invites" }, :html=>{ :method=>:post, :class=>'clear formtastic invite' }) do |f| %>
+			<div>
+				Convide seus amigos para fazer parte da MyChofer, seprando os emails por ;
+				<br>
+				<%= f.text_area :invite %>
+			</div>
+			<div>
+				Digite uma mensagem
+				<br>
+				<%= f.text_area :message %>
+			</div>
+			<div>
+				<%= f.submit %>
+			</div>
+		<% end %>
+	</section>
+</section>

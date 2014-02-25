@@ -1,0 +1,12 @@
+<table class="basetable">
+	<tr><th>Dia e hora</th><th>Tipo</th><th>Tipo de carro</th><td>Origem</th><th>Destino</th><td>Passageiro</th><td>Chauffeur</th><td>Valor</th></tr>
+	<tbody>
+		<% @corridas.each do |corrida| %>
+			<tr>
+				<td>
+					<%=  corrida.to_s %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

@@ -1,0 +1,66 @@
+<section id="wrapper">
+	<%=head_to_user_tag-%>
+	<nav>
+		<div class="padding">
+			<%=section_menu_tag(7)-%>
+			<div class="content">
+				<div class="account">
+					<div class="panel profile_nav_template">
+						<h1>Informações da Conta</h1>
+						<%= profile_menu_tag(7)%>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</nav>
+	<section id="content">
+		<div class="account" style="display: block;"><div id="invitation_view">
+			<div class="padding">
+				<h2><%= I18n.t 'users.title' -%></h2>
+				<section id="page_section">
+							<div style='text-align:right; background-color:red'>
+								<%= link_to('Cadastrar usuário', new_chofer_user_path )%>
+							</div>
+						<% if @users.empty? %>
+							<h3>Nenhum usuário cadastrado</h3>
+						<%else%>
+							<table class="basetable">
+								<tbody>
+									<% @users.each_with_index do |user, index| %>
+										<tr>
+											<td>
+												<%= image_tag(user.imagem_url) %>
+											</td>
+											<td>
+												<%= "#{user.first_name} #{user.last_name}" %><br>
+											</td>
+											<td>
+												<%#= button_to "+ Histórico de corridas", {:controller => 'chofer_users', :action => "load_journeys", :id => user.cdg_id}, :update => "corridas_#{user.cdg_id}", :remote => true %>
+												<%#= link_to_remote "+ Histórico de corridas", { :controller => 'chofer_users', :action => "load_journeys",  :id => user.cdg_id}, :update => "corridas_#{user.cdg_id}", :method => :get %>
+												<%#= link_to "Add new item", {:controller => 'chofer_users', :action => "load_journeys", :id => user.cdg_id}, :remote => true, "data-type" => :json, :update => 'corridas_' + user.cdg_id.to_s  %>
+												<%= button_to_function '+ Histórico de corridas', 'show_journeys(#{user.cdg_id})' %>
+											</td>
+											<td>
+												<%= link_to "<i style='font-size: 16px;' class='icon-trash icon-large'></i>".html_safe, '/chofer_users/#{user.cdg_id}', :method=>:delete, :data=>{:confirm=>'Tem certeza?'} %>
+											</td>
+											<td>
+												<%= link_to "<i style='font-size: 16px;'> Editar </i>".html_safe, edit_chofer_user_path(user.cdg_id) %>
+											</td>
+										</tr>
+										<tr id='corridas_<%= user.cdg_id.to_s %>'>
+										</tr>
+									<%end-%>
+								</tbody>
+							</table>
+						<%end%>
+				</section>
+			</div>
+		</div></div>
+	</section>
+</section>
+
+<script>
+	function show_journeys( p_user_id ){
+		$.ajax({type: 'POST',	url: '/chofer_users/load_journeys.json', data: $('form').serialize(),	success: function(data){confirmar_corrida(data)}, dataType: 'json', async: false});
+	}
+</script>

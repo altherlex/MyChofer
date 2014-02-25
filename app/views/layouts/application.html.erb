@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyChofer</title>
+	<!-- "my_style" estilo redundante-->
+	<!-- "jquery-ui/overcast/jquery-ui-1.8.23.custom"-->
+	<%= stylesheet_link_tag 'basic-jquery-slider', "web", "font-awesome", :media=>"all" %>
+	<%= javascript_include_tag "application", "jquery-1.6.2.min", "basic-jquery-slider.min", "jquery-ui-1.8.23.custom.min" %>
+	<%= csrf_meta_tags %>
+</head>
+<body>
+	<%= cabecalho_geral %>
+	<section id="main" style="display: block;overflow: hidden;">
+		<%= yield %>
+	<div id="footer_container" style="display: block;">
+		<div class="outer_centered">
+			<footer class="inner_centered">
+				<nav>
+					<h2>Sobre</h2>
+					<ul class="slide_me">
+						<li><a href="/#introduction">A campanha</a></li>
+						<li><a href="/#in_detail">Emprego</a></li>
+						<li><a href="/#rates">Blog</a></li>
+						<li><a href="/#rates">News</a></li>
+					</ul>
+				</nav>
+				<nav>
+					<h2>Download</h2>
+					<ul>
+						<li><a href="http://itunes.apple.com/en/app/cabify/id476087442?mt=8">iPhone App Store</a></li>
+						<li><a href="https://play.google.com/store/apps/details?id=com.cabify.rider&amp;hl=en">Android Market</a></li>
+					</ul>
+				</nav>
+				<nav>
+					<h2>Contact</h2>
+					<ul>
+						<li><a href="/message/new">Email</a></li>
+						<li><a href="http://www.facebook.com/cabify">Facebook</a></li>
+						<li><a href="https://twitter.com/#!/cabify">Twitter</a></li>
+					</ul>
+				</nav>
+				<nav>
+					<h2>Segurança</h2>
+					<ul>
+						<li>
+							<img src="/assets/catalunya_caixa.jpg" alt="Catalunya_caixa">
+						</li>
+						<li class="creditcard_companies">
+							<img src="/assets/visa_small.jpg" alt="Visa_small">
+							<img src="/assets/mastercard_small.jpg" alt="Mastercard_small">
+							<img src="/assets/american_express_small.jpg" alt="American_express_small">
+						</li>
+						<li>
+							<script type="text/javascript" src="https://seal.verisign.com/getseal?host_name=cabify.com&amp;size=S&amp;use_flash=NO&amp;use_transparent=YES&amp;lang=en"></script><a tabindex="-1" href="javascript:vrsn_splash()"><img border="true" alt="Click to Verify - This site has chosen an SSL Certificate to improve Web site security" oncontextmenu="return false;" src="https://seal.verisign.com/getseal?at=0&amp;sealid=2&amp;dn=cabify.com&amp;lang=en" name="seal"></a>
+						</li>
+					</ul>
+				</nav>
+				<div id="footer_notes">
+					<p>MyChofer &copy; 2012  |&nbsp; Terms of Use |&nbsp; Privacy Policy</p>
+				</div>
+			</footer>
+		</div>
+		<div class="clear"></div>	
+	</div>	
+</body>
+</html>
+</section>

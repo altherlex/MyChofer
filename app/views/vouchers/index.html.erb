@@ -1,0 +1,59 @@
+<section id="wrapper">
+	<%=head_to_user_tag-%>
+	<nav>
+		<div class="padding">
+			<%=section_menu_tag(2)-%>
+			<div class="content">
+				<div class="account">
+					<div class="panel profile_nav_template">
+						<h1>InformaÁıes da conta</h1>
+						<%= profile_menu_tag(8)%>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</nav>
+	<section id="content">
+		<div class="account" style="display: block;"><div id="invitation_view">
+			<div class="padding">
+				<h2><%= I18n.t 'vouchers.title' -%></h2>
+				<section id="page_section">
+					<%= field_set_tag('Cadastre seu Cupom', :style=>"border:1px solid silver;") do %>
+						<form method="post" action="/vouchers" accept-charset="UTF-8">
+							<table class="basetable">
+								<tbody>
+									<tr>
+										<td>Você tem cupom da MyChofer?</td>
+									</tr>
+									<tr>
+										<td><%= text_field_tag :cdg_cupom -%></td>
+										<td><%= submit_tag -%></td>
+									</tr>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+					<% end %>
+				
+					<%= field_set_tag('Cupons cadastrados', :style=>"border:1px solid silver;") do %>
+						<% if @cupons.empty? %>
+							<h3>Nenhum cupom cadastrado.</h3>
+						<%else%>
+							<table class='basetable'>
+								<tr><th>Código</th><th>Valor</th>
+								<tbody>
+								<% @cupons.each_with_index do |cupom, index| %>
+									<tr>	
+										<td><%= cupom.cdg_id %></td>
+										<td><%= cupom.valor %></td>
+									</tr>
+								<%end-%>
+								</tbody>
+							</table>
+						<%end%>
+					<%end%>
+				</section>
+			</div>
+		</div></div>
+	</section>
+</section>

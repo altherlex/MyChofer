@@ -1,0 +1,141 @@
+<!--  Tela de alteração de cartão de credito -->
+<script type="text/javascript">
+$(document).ready(function(){
+	$.each($('.op_alteracao_cartao_credito'), function(i, el){
+		criar_tela_alteracao(el, el.getAttribute('cdg_forma_pagamento'));
+	});
+});
+function criar_tela_alteracao(el, p_cdg_cartao){
+	var form = $('.form_criar_cartao:first').clone();
+	/* Ir para alteração */
+	form.attr('action', '/payments/'+p_cdg_cartao);
+	form.append($('<input id="_method" type="hidden" value="put" name="_method">'));
+	form.find('input[type="submit"]').remove();
+	form.attr('id', 'form_criar_cartao'+p_cdg_cartao);
+
+	var div_wrap = $('<div id="dialog-form'+p_cdg_cartao +'" title="Alterando cartão"></div>');
+
+	div_wrap.append( form );
+	$('body').prepend(div_wrap);
+	$( '#'+div_wrap.attr('id') ).dialog({
+	  autoOpen: false,
+	  height: 450,
+	  width: 526,
+	  modal: true,
+		buttons: {
+	    "Alterar": function() {
+		    	$('#'+form.attr('id')).submit();
+      },
+      Cancel: function() {
+          $( this ).dialog( "close" );
+      }
+     }
+	});
+	/* TODO: Continuar com o metodo de alteração do cartao
+	*  Carregar as informações do cartao a ser alterado
+	*/
+	$(el).click(function(){
+		$('#'+div_wrap.attr('id')).dialog("open");
+	});
+};	
+</script>
+<section id="wrapper">
+	<%=head_to_user_tag-%>
+	<nav>
+		<div class="padding">
+			<%=section_menu_tag(2)-%>
+			<div class="content">
+				<div class="account">
+					<div class="panel profile_nav_template">
+						<h1>Informações da conta</h1>
+						<%= profile_menu_tag(2)%>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</nav>
+	<section id="content">
+		<div class="account" style="display: block;"><div id="invitation_view">
+			<div class="padding">
+				<h2><%= I18n.t 'payments.title' -%></h2>
+				<section id="page_section">
+					<%= field_set_tag('Cartões cadastrados', :style=>"border:1px solid silver;") do %>
+						<% if @cartaoes.empty? %>
+							<h3>Nenhum cartão cadastrado.</h3>
+						<%else%>
+						<style type="text/css">
+						table.minha_table{
+							width: 100%;
+						}
+						table.minha_table tbody > tr{
+						  background-color: #474D55;
+    					border: 1px solid #4B6574;
+    				}
+						</style>
+							<table class="basetable minha_table">
+								<tbody>
+								<% @cartaoes.each_with_index do |cartao, index| %>
+									<tr>
+										<td><%= image_tag "cartoes_credito/#{cartao.cdg_bandeira}.png" %></td>
+										<td>
+											<%= cartao.dsc_tipo + " (#{cartao.dsc_preferencia})" %><br/>
+											<%= "xxxx xxxx xxxx #{cartao.ultimos_digitos||'0000'}" %>
+										</td>
+										<td><%= cartao.dta_alteracao.to_s(:complete)%></td>
+										<!--<a class="btn btn-danger" href="#">Delete-->
+										<td>
+											<%= link_to '<i style="font-size: 16px;" class="icon-pencil icon-large"></i>'.html_safe, "#", :id=>'create-user', :cdg_forma_pagamento=>cartao.cdg_forma_pagamento, :class=>'op_alteracao_cartao_credito' %>
+										</td><td>
+											<%= link_to '<i style="font-size: 16px;" class="icon-trash icon-large"></i>'.html_safe, "/payments/#{cartao.cdg_cartao}", :method=>:delete, :data=>{:confirm=>'Tem certeza?'} %>
+										</td>
+									</tr>
+								<%end-%>
+								</tbody>
+							</table>
+						<%end%>
+					<%end%>
+					<%= field_set_tag('Cadastre seu cartao', :style=>"border:1px solid silver; height: 375px;") do %>
+						<form method="post" action="/payments" accept-charset="UTF-8" class='form_criar_cartao'>
+							<table class="basetable">
+								<tbody>
+									<tr>
+										<td>Bandeira</td>
+										<td><%= select_tag :cdg_bandeira_cartao, options_for_select(SoapConnection::Cartao.bandeiras_to_options) -%></td>
+									</tr>
+									<tr>
+										<td>Nome no cartão</td>
+										<td><%= text_field_tag :nme_cartao -%></td>
+									</tr>
+									<tr>
+										<td>Número do cartão</td>
+										<td><%= number_field_tag :nmr_cartao -%></td>
+									</tr>
+									<tr>
+										<td>Código de segurança</td>
+										<td><%= number_field_tag :cdg_seguranca -%></td>
+									</tr>								
+									<tr>
+										<td>Data de vencimento</td>
+										<td><%= datepicker_tag :dta_vencimento, nil, :minDate=>0, :dateFormat=>"yy-mm" -%></td>
+									</tr>
+									<tr>
+										<td>Preferência</td>
+										<td><%= select_tag :tpo_preferencia, options_for_select([["Primário", "P"], ["Secundário", "S"], ["Terciário", "T"]]) -%></td>
+									</tr>
+									<tr>
+										<td>Tipo</td>
+										<td><%= select_tag :cdg_tipo, options_for_select([["Pessoal", "P"], ["Corporátivo", "C"]]) -%></td>
+									</tr>		
+									<tr>
+										<td></td>
+										<td><input type="submit" value="Cadastrar" name="commit"></td>
+									</tr>										
+								</tbody>
+							</table>
+						</form>
+					<% end %>
+				</section>
+			</div>
+		</div></div>
+	</section>
+</section>

@@ -1,0 +1,39 @@
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">  
+<form method="post" action="/payments" accept-charset="UTF-8" id='form_criar_cartao'>
+	<table class="basetable">
+		<tbody>
+			<tr>
+				<td>Bandeira</td>
+				<td><%= select_tag :cdg_bandeira_cartao, options_for_select(SoapConnection::Cartao.bandeiras_to_options) -%></td>
+			</tr>
+			<tr>
+				<td>Nome no cartão</td>
+				<td><%= text_field_tag :nme_cartao -%></td>
+			</tr>
+			<tr>
+				<td>Número do cartão</td>
+				<td><%= number_field_tag :nmr_cartao -%></td>
+			</tr>
+			<tr>
+				<td>Código de segurança</td>
+				<td><%= number_field_tag :cdg_seguranca -%></td>
+			</tr>								
+			<tr>
+				<td>Data de vencimento</td>
+				<td><%= datepicker_tag :dta_vencimento, nil, :minDate=>0, :dateFormat=>"yy-mm" -%></td>
+			</tr>
+			<tr>
+				<td>Preferência</td>
+				<td><%= select_tag :tpo_preferencia, options_for_select([["Primário", "P"], ["Secundário", "S"], ["Terciário", "T"]]) -%></td>
+			</tr>
+			<tr>
+				<td>Tipo</td>
+				<td><%= select_tag :cdg_tipo, options_for_select([["Pessoal", "P"], ["Corporátivo", "C"]]) -%></td>
+			</tr>		
+			<tr>
+				<td></td>
+				<td><input type="submit" value="Cadastrar" name="commit"></td>
+			</tr>										
+		</tbody>
+	</table>
+</form>

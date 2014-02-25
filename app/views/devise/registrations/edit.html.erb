@@ -1,0 +1,131 @@
+<section id="wrapper">
+	<%=head_to_user_tag-%>
+<nav>
+	<div class="padding">
+		<%=section_menu_tag(2)-%>
+		<div class="content">
+			<div class="journeys" style="display: none;">
+				<!-- TODO: GOOGLE MAPS -->
+			</div>
+			<div class="account">
+				<div class="panel profile_nav_template">
+					<h1>Informações da conta</h1>
+					<%= profile_menu_tag(1)%>
+				</div>
+			</div>
+		</div>
+	</div>		
+</nav>
+<section id="content">
+	<div class="account" style="display: block;">
+	<div id="user_edit_view"><div class="padding">
+		<h2>Profile</h2>
+		<%= form_for(resource, :as=>resource_name, :url=>registration_path(resource_name), :html=>{ :multipart=>true, :method=>:put, :class=>'clear formtastic user' }) do |f| %>
+			<%= devise_error_messages! %>
+			<%#= file_field_tag "file", :id=>"user_avatar" %>
+			<div id="user_photo">
+				<div class="image_wrapper">
+					<%= image_tag @user.avatar.url(:small), :style=>"height: 100%;width: 100%;" %>
+					<div class="user_photo_overlay" style="display: none;"></div>
+					<div class="user_photo_overlay_icon" style="display: none;"></div>
+				</div>
+				<div class="image_change_text">Press save to upload this file</div>
+			</div>
+			<%=f.file_field :avatar, :style=>'position:inherit;' %>
+			<div id="user_details">
+				<%= field_set_tag nil, :class => 'inputs' do %>
+					<ol><div class="wrapper">
+						<li class="input stringish">
+							<%= f.label :email, :class=>'label' %>
+							<%= f.email_field :email %>
+						</li>
+						<li class="change_password_link"><a href="javascript:void(show_and_hide('div.change_password'))" class="change_password">Change password?</a></li>
+					</div></ol>
+				<%end%>
+				<%= field_set_tag nil, :class => 'inputs last' do %>
+					<ol><div class="wrapper change_password">
+						<li class="input stringish">
+							<%= f.label :current_password, :class=>'label' %> <!-- <i>(we need your current password to confirm your changes)</i> -->
+							<%= f.password_field :current_password %>
+						</li>
+					</div>
+					<div class="wrapper change_password">
+						<li class="input stringish">
+							<%= f.label :password, :class=>'label' %> <!--<i>(leave blank if you don't want to change it)</i>-->
+							<%= f.password_field :password, :autocomplete => "off" %>
+						</li>	
+					</div>
+					<div class="wrapper change_password">
+						<li class="input stringish">
+							<%= f.label :password_confirmation, :class=>'label' %>
+							<%= f.password_field :password_confirmation %>
+						</li>
+					</div>
+					<div class="wrapper">
+						<li class="input stringish">
+							<%= f.label :first_name, :class=>'label' %>
+							<%= f.text_field :first_name %>
+						</li>	
+					</div>
+					<div class="wrapper">
+						<li class="input stringish">
+							<%= f.label :last_name, :class=>'label' %>
+							<%= f.text_field :last_name %>
+						</li>
+					</div>
+<!--					
+					<div class="wrapper">
+						<li class="input stringish">
+							<%#= f.label :idiom, :class=>'label' %>
+							<%#= f.text_field :idiom %>
+						</li>	
+					</div>
+-->
+					<div class="wrapper">
+						<li class="input stringish">
+							<%= f.label :number_phone, :class=>'label' %>
+							<%= f.text_field :number_phone %>
+						</li>	
+					</div></ol>
+				<%end%>
+					<div class="wrapper">
+						<li class="">
+							<%= f.label :Metros, :class=>'label' %>
+							<%#= @user.metros_rodados %>
+							<%= f.label :Tempo, :class=>'label' %>
+							<%#= @user.tempo_corrida %>
+						</li>	
+					</div>
+					
+					<% empresa = SoapConnection::Empresa.valida_master((current_user.id rescue 1), current_user) %>
+					<% if empresa %>					
+						<!-- Empresa -->
+						<%= field_set_tag("Informa›es da sua Empresa", :style=>"border:1px solid silver;") do %>
+							<table class='basetable'>
+								<tr><th>Nome</th><th>CNPJ</th>
+								<tbody>
+									<tr>	
+										<td><%= "#{empresa.first_name} #{empresa.last_name}" %></td>
+										<td>N‹o dispon’vel no WS<%#= cupom.valor %></td>
+									</tr>
+								</tbody>
+							</table>
+						<%end%>
+					<% end %>
+					
+				<%= field_set_tag nil, :class => 'actions' do %>
+					<ol>
+						<li class='action input_action'><%= f.submit "Salvar" %></li>
+					</ol>
+				<%end%>
+			</div>
+		<% end %>
+		<!--
+		<h3>Cancel my account</h3>
+		<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
+		<%= link_to "Back", :back %>
+		-->
+	</div></div>
+	</div>
+</section>	
+</section>

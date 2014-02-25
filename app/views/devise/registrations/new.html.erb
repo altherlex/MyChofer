@@ -1,0 +1,42 @@
+<div class="wrapper">
+	<section id="signin" class="page">
+		<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+			<header>
+				<h2>Cadastre-se</h2>
+				<%- if controller_name != 'sessions' %>
+					<span>Já é membro?
+						<%= link_to "Entrar", new_session_path(resource_name) %>
+					</span>			
+				<%end%>
+			</header>
+			<div class="row">
+				<%= devise_error_messages! %>
+			</div>
+			<div class="row">
+				<%= f.text_field :first_name, {:class=>'text',:placeholder=>'First name'} %>
+			</div>
+			<div class="row">
+				<%= f.text_field :last_name, {:class=>'text',:placeholder=>'Last name'} %>
+			</div>			
+<!--
+			<div class="row">
+				<%#= f.text_field :idiom, {:class=>'text',:placeholder=>'Idioma'} %>
+			</div>
+-->
+			<div class="row">
+				<%= f.email_field :email, {:class=>'text',:placeholder=>'E-mail'} %>
+			</div>
+			<div class="row">
+				<%= f.password_field :password, {:class=>'text',:placeholder=>'Senha'} %>
+			</div>
+			<div class="row">
+				<%= f.password_field :password_confirmation, {:class=>'text',:placeholder=>'Confirme a senha'} %>
+			</div>
+			<div class="row">
+				<%= f.text_field :number_phone, {:class=>'text',:placeholder=>'Number phone'} %>
+			</div>			
+			<div class="row"><%= f.submit "Cadastrar", {:class=>"submit"} %></div>
+		<% end %>
+		<%#= render "devise/shared/links" %>
+</section>
+</div>

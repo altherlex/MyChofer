@@ -1,0 +1,59 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+pt:
+  hello: "Hello world"
+  date:
+    formats:
+      default: "%d/%m/%Y"
+  payments:
+    title: "Pagamento"
+  vouchers:
+    title: "Cupons e Descontos"
+  users:
+    title: "USUçRIOS" 
+  invitations:
+    title: "Convites"
+    head_info: "Convide seus amigos e ganha R$10 para você e mais R$10 para o seu amigo"
+    head_info_details: "Invite your friends to go with Cabify, just like you. Every friend will get R$10 worth credit, and you’ll get R$10 once they make their first ride. So the more people you invite, the more free rides you get."
+    info-send-email: "Envie convites para seus amigos!!!"
+    how-send-email: "Escreva aqui os e-mails separando-os por ponto e virgula"
+  dominio:
+    cartao:
+      preferencia: "[['P','Primário'],['S','Secundário'],['T','Terciário']]"
+      tipo: "[['P','Pessoal'],['C','Corporativo']]"
+    corrida:
+      # 'AM','Aguardando motorista'
+      # 'AG','Agendada' => Quando o motorista aceita a corrida. Foi agendada para ele
+      # 'AC', 'Motorista a seu caminho' =. Quando o motorista saiu da garagem a caminho do cliente
+      # 'CM','Cancelada pelo motorista'
+      # Se corrida for WA. Enviar uma pergunta pro cliente: Chegou em 5("2") min ou Estou indo("1"). InsereRespostaCliente(cdg_corrida, resposta_cliente)
+      status: "[['CC','Cancelada'], ['CM','Aguarde, estamos procurando um motorista disponível'], ['CS','Cancelada pelo sistema'], ['AT','Ativa'], ['AM','Aguarde, estamos procurando um motorista disponível'], ['AG','Aguarde, estamos procurando um motorista disponível'], ['FI','Finalizada'],['AC','Motorista a caminho'], ['WA','(Waiting)Motorista está a seu aguardo'], ['NO','(NoShow)Cliente não apareceu'], ['EM','(Emergência)Algo errado aconteceu']]"
+      tipo_carro: "[['N','Carro de luxo'],['1','Carro de luxo'],['B','Carro blindado'],['2','Carro blindado']]"
+      tipo: "[['TU','Único'],['PK','Pacote']]"
+      agenda: "[['A','Agora'],['D','Depois']]"
+      pergunta: "[['1', 'Estou indo'], ['2','Preciso de 5min']]"
+  corrida:
+    regra:
+      status_a_atualizar: "['AM', 'AG', 'AC', 'CM']"
+      status_pendentes: "['AT', 'AG', 'CM', 'AM', 'AC', 'WA']"
+      status_para_pergunta: "['WA']"
+      #just test status_para_pergunta: "['AG']"
+      pergunta:
+        titulo: "O motorista chegou!"
+        mensagem: "Cade você?"
+        primeira_opcao: 
+          texto: "Estou indo"
+          valor: "1"
+        segunda_opcao:
+          texto: "Preciso de 5min"
+          valor: "2"
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              confirmation: "Confirme sua senha"
+            email:
+              taken: 'já cadastrado!'
