@@ -1,7 +1,18 @@
 MyChofer
 =======
 
-MyChofer, please!
+A chauffeur, please! || MyChofer, please!
+That's my onw http://www.cabify.es
+Service to call your chofer with safety and comfort.
+
+Really, it's a copy of cabify service. For train and teach some functions about:
+* Google Maps;
+* Soap Connection with Savon;
+* Devise;
+* Gravtastic;
+* PaperClip;
+
+All request (CRUD) are done in a WebService.
 
 Components
 ----------
